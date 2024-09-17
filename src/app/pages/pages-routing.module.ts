@@ -25,6 +25,27 @@ const routes: Routes = [
         path: 'config/country',
         loadChildren: () => import('./system-config/country/country.module').then(m => m.CountryModule)
       },
+      {
+        path:'config/location',
+        loadChildren:()=>import('./system-config/locations/locations.module').then(m=>m.LocationsModule)
+      },
+      {
+        path:'users',
+        loadChildren:()=> import('./users/usermanag/usermanag.module').then(m=>m.UsermanagModule)
+      },
+      {
+        path:'config/work-station',
+        loadChildren:()=>import('./system-config/workstation/workstation.module').then(m=>m.WorkstationModule)
+      },
+      {
+        path:'config/employer',
+        loadChildren:()=>import('./system-config/employer/employer.module').then(m=>m.EmployerModule)
+      },
+      {
+        path:'config/employer-type',
+        loadChildren:()=>import('./system-config/employer-type/employer-type.module').then(m=>m.EmployerTypeModule)
+
+      },
 
 
 

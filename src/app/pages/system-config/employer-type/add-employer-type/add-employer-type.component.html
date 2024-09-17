@@ -1,0 +1,29 @@
+<div>
+  <div class="w-full">
+    <div class="relative h-full rounded-lg  group  p-6">
+      <div class="font-semibold" *ngIf="!id">CREATE NEW EMPLOYER TYPE</div>
+      <div class="font-semibold" *ngIf="id">UPDATE EMPLOYER TYPE</div>
+
+      <form [formGroup]="employerTypeForm">
+        <mat-form-field class="w-full mt-6">
+          <mat-label>Employer Type Name</mat-label>
+          <input matInput placeholder="Ex. private" formControlName="employer_type_name" type="text">
+          <mat-error class="error-message" *ngIf="employerTypeForm.controls['employer_type_name'].touched && employerTypeForm.controls['employer_type_name'].invalid">
+            <span *ngIf="employerTypeForm.controls['employer_type_name'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="employerTypeForm.controls['employer_type_name'].errors?.['pattern']">This field is invalid (must be contain alpharbetical only)</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="!id" cdkFocusInitial [disabled]="employerTypeForm.invalid" (click)="saveEmployerType()">Save Data</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="id" cdkFocusInitial [disabled]="employerTypeForm.invalid" (click)="updateEmployerType()">Update Data</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+

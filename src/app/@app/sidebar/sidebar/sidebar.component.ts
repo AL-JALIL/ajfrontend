@@ -70,19 +70,19 @@ export class SidebarComponent {
       type: 'group',
       name: 'Config Users & Audit',
       icon: 'person',
-      permission: ['User Management', 'View Permission', 'System Audit'],
+      permission: ['User Management', 'View Permission', 'View Role'],
       children: [
-        {
-          type: 'link',
-          name: 'System Audits',
-          link: '/pages/users/permissionsh',
-          permission: 'System Audit',
+        // {
+        //   type: 'link',
+        //   name: 'System Audits',
+        //   link: '/pages/users/permissionsh',
+        //   permission: 'System Audit',
 
-        },
+        // },
         {
           type: 'link',
           name: 'Manage Users',
-          link: '/pages/dashboard/ecommerce',
+          link: '/pages/users',
           permission: 'User Management',
 
         },
@@ -90,7 +90,7 @@ export class SidebarComponent {
           type: 'link',
           name: 'Manage Roles',
           link: '/pages/users/role-permission',
-          permission: 'User Management',
+          permission: 'View Role',
 
         },
         {
@@ -118,38 +118,55 @@ export class SidebarComponent {
         },
         {
           type: 'link',
-          name: 'Breadcrumbs',
-          link: '/pages/navigation/breadcrumbs',
-          permission: 'View Country',
-
+          name: 'Location',
+          link: '/pages/config/location',
+          permission: 'View Location',
         },
         {
           type: 'link',
-          name: 'Tab Panel',
-          link: '/pages/navigation/tab-panel',
-          permission: 'View Country',
-
+          name: 'Employer',
+          link: '/pages/config/employer',
+          permission: 'View Employer',
         },
-      ]
-    },
-
-    {
-      id: 'profile',
-      type: 'group',
-      name: 'User Profile',
-      icon: 'menu',
-      permission: 'Setup Management',
-      children: [
         {
           type: 'link',
-          name: 'Talent Profile',
-          link: '/pages/user-profile/talent-profile',
+          name: 'Work Station',
+          link: '/pages/config/work-station',
+          permission: 'View Workstation',
+        },
+        {
+          type: 'link',
+          name: 'Employer Type',
+          link: '/pages/config/employer-type',
+          permission: 'View Employer Type',
+        },
+        // {
+        //   type: 'link',
+        //   name: 'Tab Panel',
+        //   link: '/pages/navigation/tab-panel',
+        //   permission: 'View Country',
 
-          permission: 'View Permission',
-
-        }
+        // },
       ]
     },
+
+    // {
+    //   id: 'profile',
+    //   type: 'group',
+    //   name: 'User Profile',
+    //   icon: 'menu',
+    //   permission: 'Setup Management',
+    //   children: [
+    //     {
+    //       type: 'link',
+    //       name: 'Talent Profile',
+    //       link: '/pages/user-profile/talent-profile',
+
+    //       permission: 'View Permission',
+
+    //     }
+    //   ]
+    // },
 
   ];
   navItemLinks: NavItem[] = [];

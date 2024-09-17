@@ -1,0 +1,103 @@
+<div>
+  <div class="w-full">
+    <div class="relative h-full rounded-lg  group  p-6">
+      <div class="font-semibold" *ngIf="!id">CREATE NEW USER</div>
+      <div class="font-semibold" *ngIf="id">UPDATE USER</div>
+      <form [formGroup]="userForm">
+        <mat-form-field class="w-full mt-6">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="Ex. ALI" formControlName="first_name" type="text">
+          <mat-error class="error-message" *ngIf="userForm.controls['first_name'].touched && userForm.controls['first_name'].invalid">
+            <span *ngIf="userForm.controls['first_name'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="userForm.controls['first_name'].errors?.['pattern']">This field is invalid (must be contain alpharbetical only)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full mt-6">
+          <mat-label>Middle Name</mat-label>
+          <input matInput placeholder="Ex. JUMA" formControlName="middle_name" type="text">
+          <mat-error class="error-message" *ngIf="userForm.controls['middle_name'].touched && userForm.controls['middle_name'].invalid">
+            <span *ngIf="userForm.controls['middle_name'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="userForm.controls['middle_name'].errors?.['pattern']">This field is invalid (must be contain alpharbetical only)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full mt-6">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Ex. HAJI" formControlName="last_name" type="text">
+          <mat-error class="error-message" *ngIf="userForm.controls['last_name'].touched && userForm.controls['last_name'].invalid">
+            <span *ngIf="userForm.controls['last_name'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="userForm.controls['last_name'].errors?.['pattern']">This field is invalid (must be contain alpharbetical only)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. abd@gmail.com" formControlName="email" type="text">
+          <mat-error class="error-message" *ngIf="userForm.controls['email'].touched && userForm.controls['email'].invalid">
+            <span *ngIf="userForm.controls['email'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="userForm.controls['email'].errors?.['pattern']">This field is invalid (email is incorrect)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Phone Number</mat-label>
+          <input matInput placeholder="Ex. 0777000000" formControlName="phone_no" type="text">
+          <mat-error class="error-message" *ngIf="userForm.controls['phone_no'].touched && userForm.controls['phone_no'].invalid">
+            <span *ngIf="userForm.controls['phone_no'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="userForm.controls['phone_no'].errors?.['pattern']">This field is invalid (phone number must have 10 digit)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Shehia</mat-label>
+          <input type="text" matInput placeholder="public" formControlName="location_id" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackById" [value]="option">
+              {{ option.label }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Council</mat-label>
+          <mat-select formControlName="council_id">
+            <mat-option *ngFor="let council of councils" [value]="council.council_id">
+              {{ council.council_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role_id">
+            <mat-option *ngFor="let role of roles" [value]="role.id">
+              {{ role.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">
+              Male
+            </mat-option>
+            <mat-option value="Female">
+              Female
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-full mt-6">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput placeholder="Ex. ALI" formControlName="date_of_birth" type="date">
+          <mat-error class="error-message" *ngIf="userForm.controls['date_of_birth'].touched && userForm.controls['date_of_birth'].invalid">
+            <span *ngIf="userForm.controls['date_of_birth'].errors?.['required']">This field is mandatory</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="!id" cdkFocusInitial [disabled]="userForm.invalid" (click)="saveUser()">Save Data</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="id" cdkFocusInitial [disabled]="userForm.invalid" (click)="updateUser()">Update Data</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+

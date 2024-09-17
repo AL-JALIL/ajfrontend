@@ -1,0 +1,53 @@
+<div>
+  <div class="w-full">
+    <div class="relative h-full rounded-lg  group  p-6">
+      <div class="font-semibold" *ngIf="!id">CREATE NEW EMPLOYER</div>
+      <div class="font-semibold" *ngIf="id">UPDATE EMPLOYER</div>
+      <form [formGroup]="employerForm">
+        <mat-form-field class="w-full mt-6">
+          <mat-label>Employer Name</mat-label>
+          <input matInput placeholder="Ex. Ministry of Health Zanzibar" formControlName="employer_name" type="text">
+          <mat-error class="error-message" *ngIf="employerForm.controls['employer_name'].touched && employerForm.controls['employer_name'].invalid">
+            <span *ngIf="employerForm.controls['employer_name'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="employerForm.controls['employer_name'].errors?.['pattern']">This field is invalid (must be contain alpharbetical only)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. abd@gmail.com" formControlName="employer_email" type="text">
+          <mat-error class="error-message" *ngIf="employerForm.controls['employer_email'].touched && employerForm.controls['employer_email'].invalid">
+            <span *ngIf="employerForm.controls['employer_email'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="employerForm.controls['employer_email'].errors?.['pattern']">This field is invalid (email is incorrect)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Phone Number</mat-label>
+          <input matInput placeholder="Ex. 0777000000" formControlName="employer_phone" type="text">
+          <mat-error class="error-message" *ngIf="employerForm.controls['employer_phone'].touched && employerForm.controls['employer_phone'].invalid">
+            <span *ngIf="employerForm.controls['employer_phone'].errors?.['required']">This field is mandatory</span>
+            <span *ngIf="employerForm.controls['employer_phone'].errors?.['pattern']">This field is invalid (phone number must have 10 digit)</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Employer Type</mat-label>
+          <input type="text" matInput placeholder="public" formControlName="employer_type_id" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async; trackBy: trackById" [value]="option">
+              {{ option.employer_type_name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="!id" cdkFocusInitial [disabled]="employerForm.invalid" (click)="saveEmployer()">Save Data</button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="id" cdkFocusInitial [disabled]="employerForm.invalid" (click)="updateEmployer()">Update Data</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+
